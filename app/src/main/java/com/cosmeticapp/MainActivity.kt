@@ -44,7 +44,7 @@ data class Product(val title: String, val description: String, val price: Float,
 @Composable
 fun Products(modifier: Modifier = Modifier) {
     Column(modifier = modifier) {
-        ProductItem(modifier = Modifier.fillMaxWidth())
+        ProductItem()
         ProductItem()
         ProductItem()
     }
@@ -65,29 +65,34 @@ fun ProductItem(
             painter = painterResource(id = R.drawable.ic_launcher_background),
             contentDescription = null
         )
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(all = 8.dp)
-        ) {
-            Text(
-                text = product.title,
-                overflow = TextOverflow.Ellipsis,
-                fontWeight = FontWeight.Bold,
-                style = MaterialTheme.typography.titleMedium
-            )
-            Text(
-                text = product.description,
-                modifier = Modifier.padding(vertical = 8.dp),
-                maxLines = 2
-            )
-            Text(
-                text = product.price.toString().plus("$"),
-                modifier = Modifier.padding(vertical = 8.dp)
-            )
-        }
+        ProductTextContent(product)
     }
 
+}
+
+@Composable
+private fun ProductTextContent(product: Product) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(all = 8.dp)
+    ) {
+        Text(
+            text = product.title,
+            overflow = TextOverflow.Ellipsis,
+            fontWeight = FontWeight.Bold,
+            style = MaterialTheme.typography.titleMedium
+        )
+        Text(
+            text = product.description,
+            modifier = Modifier.padding(vertical = 8.dp),
+            maxLines = 2
+        )
+        Text(
+            text = product.price.toString().plus("$"),
+            modifier = Modifier.padding(vertical = 8.dp)
+        )
+    }
 }
 
 @Preview
